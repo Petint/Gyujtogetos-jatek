@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerLogic : MonoBehaviour
 {
     public ScoreLogic scoreGUIscript;
+    public string SceneToLoad;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,16 +21,14 @@ public class PlayerLogic : MonoBehaviour
     }
 
      void OnCollisionEnter2D(Collision2D tempCollision) {
-        if (tempCollision.gameObject.tag == "Collectable")
+        if (tempCollision.gameObject.CompareTag("Collectable"))
         {
             Destroy(tempCollision.gameObject);
             scoreGUIscript.Score += 1;
-
         }
-        else if (tempCollision.gameObject.tag == "BadCollectable")
+        else if (tempCollision.gameObject.CompareTag("BadCollectable"))
         {
-            SceneManager.LoadScene("SampleScene");
-
+            SceneManager.LoadScene(SceneToLoad);
         }
     }
 }

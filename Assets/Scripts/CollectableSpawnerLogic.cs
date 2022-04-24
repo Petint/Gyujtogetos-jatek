@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CollectableSpawnerLogic : MonoBehaviour
@@ -12,44 +11,38 @@ public class CollectableSpawnerLogic : MonoBehaviour
     float randomYCollectable = 0.0f;
     float randomXBadCollectable = 0.0f;
     float randomYBadCollectable = 0.0f;
-    float maxX = 17.5f;
-    float maxY = 9.0f;
-    // Start is called before the first frame update
+    readonly float maxX = 17.5f;
+    readonly float maxY = 9.0f;
+    
     void Start()
     {
-        StartCoroutine(spawnCollactables());
-        StartCoroutine(spawnBadCollactables());
+        StartCoroutine(SpawnCollactables());
+        StartCoroutine(SpawnBadCollactables());
     }
-            IEnumerator spawnCollactables() {
+            IEnumerator SpawnCollactables() {
             while (true){
-                spawnCollactable();
+                SpawnCollactable();
                 yield return new WaitForSeconds(collectableSpawnTime);
             }
         }
         
-            IEnumerator spawnBadCollactables() {
+            IEnumerator SpawnBadCollactables() {
             while (true){
-                spawnBadCollactable();
+                SpawnBadCollactable();
                 yield return new WaitForSeconds(badcollectableSpawnTime);
             }
         }
 
-    void spawnBadCollactable(){
+    void SpawnBadCollactable(){
         randomXBadCollectable = Random.Range(-maxX, maxX);
         randomYBadCollectable = Random.Range(-maxY, maxY);
 
         Instantiate(collectable, new Vector3(randomXBadCollectable, randomYBadCollectable, 0), Quaternion.identity); 
     }
-     void spawnCollactable(){
+     void SpawnCollactable(){
         randomXCollectable = Random.Range(-maxX, maxX);
         randomYCollectable = Random.Range(-maxY, maxY);
 
         Instantiate(badcollectable, new Vector3(randomXCollectable, randomYCollectable, 0), Quaternion.identity); 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
