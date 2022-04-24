@@ -4,9 +4,13 @@ using UnityEngine.SceneManagement;
 public class PlayerLogic : MonoBehaviour
 {
     public ScoreLogic scoreGUIscript;
+    public AudioSource CollectSound;
     public string SceneToLoad;
     // Start is called before the first frame update
-    void Start() => Cursor.visible = false;
+    void Start()
+    {
+        Cursor.visible = false;
+    }
 
     // Update is called once per frame
     void Update()
@@ -21,6 +25,7 @@ public class PlayerLogic : MonoBehaviour
         if (tempCollision.gameObject.CompareTag("Collectable"))
         {
             Destroy(tempCollision.gameObject);
+            CollectSound.Play();
             scoreGUIscript.Score += 1;
         }
         else if (tempCollision.gameObject.CompareTag("BadCollectable"))
